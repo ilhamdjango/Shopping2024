@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %} {{ setting.title }}
+{% endblock %}
+
+
+{%block container2 %}
+ <div class="main">
+      <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="{% url 'index' %}">Ana səhifə</a></li>
+            <li><a href="">Səhifələr</a></li>
+            <li class="active">Bizimlə əlaqə</li>
+        </ul>
+        <!-- BEGIN SIDEBAR & CONTENT -->
+        <div class="row margin-bottom-200">
+          <!-- BEGIN SIDEBAR -->
+          <div class="sidebar col-md-4 col-sm-4">
+
+
+            <h2>Bizimlə əlaqə</h2>
+            <address>
+              {{setting.adress}}<br>
+              <abbr title="Phone">Telefon :</abbr> {{setting.phone}}<br>
+            </address>
+            <address>
+              <strong>Email</strong><br>
+              <a href="mailto:info@metronic.com">{{setting.email}}</a><br>
+              <a href="mailto:support@metronic.com">{{setting.smtpemail}}</a>
+            </address>
+            <ul class="social-icons margin-bottom-10">
+              <li><a href="javascript:;" data-original-title="facebook" class="facebook"></a></li>
+              <li><a href="javascript:;" data-original-title="github" class="github"></a></li>
+              <li><a href="javascript:;" data-original-title="Goole Plus" class="googleplus"></a></li>
+              <li><a href="javascript:;" data-original-title="linkedin" class="linkedin"></a></li>
+              <li><a href="javascript:;" data-original-title="rss" class="rss"></a></li>
+            </ul>
+          </div>
+          <!-- END SIDEBAR -->
+
+          <!-- BEGIN CONTENT -->
+          <div class="col-md-5 col-sm-5">
+              <p><!--Bura Setting modelinin contactini yazajam--></p>
+              <!-- BEGIN FORM-->
+              <!--Bu if ve for dongusunun icinde olan mesaj meselesi wiefdeki mesaji cagirir-->
+              {% if messages %}
+              {% for message in messages %}
+              <div class="alert alert-{{message.tags}}" role="alert" >
+                {{ message }}
+              </div>
+              {% endfor %}
+              {% endif %}
+
+
+             <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+        <p>
+            {{ field.label_tag }}<br>
+            {{ field }}
+            {% if field.help_text %}
+                <small style="color: grey">{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+                <p style="color: red">{{ error }}</p>
+            {% endfor %}
+        </p>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">Qeydiyyat</button>
+</form>
+
+              <!-- END FORM-->
+
+          </div>
+          <!-- END CONTENT -->
+        </div>
+        <!-- END SIDEBAR & CONTENT -->
+      </div>
+    </div>
+
+{% endblock %}

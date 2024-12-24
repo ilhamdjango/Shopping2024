@@ -1,0 +1,68 @@
+        {% load static %}
+        <!-- BEGIN SALE PRODUCT & NEW ARRIVALS -->
+        <div class="row margin-bottom-40" >
+            <!-- BEGIN SALE PRODUCT -->
+            <div class="col-md-12 sale-product">
+              <h2>Kolleksiyamız</h2>
+                       {% if messages  %}
+                      {% for message in messages %}
+                      <div class="alert alert-{{ message.tags }}" role="alert" >
+                      {{ message }}
+                      </div>
+                        {%endfor%}
+                      {%endif%}
+
+              <div class="owl-carousel owl-carousel5">
+                {% for pr_s in product_sale  %}
+                <div>
+                  <div class="product-item">
+                    <div class="pi-img-wrapper">
+                      <img src="{{pr_s.image.url}}" class="img-responsive" alt="Berry Lace Dress">
+                      <div>
+                        <a href="{{pr_s.image.url}}" class="btn btn-default fancybox-button">Böyüt</a>
+                        <a href="/shop-item/{{pr_s.id}}/{{pr_s.slug}}"   class="btn btn-default fancybox-fast-view">Məlumat</a>
+                      </div>
+                      </div>
+                      <h3>{{pr_s.title}}</h3>
+                    <div class="pi-price">{{pr_s.title}}</div>
+                      {%if user.id is not None%}
+                        <a href="/order/addtocart/{{pr_s.id}}" class="btn btn-default add2cart">Səbət</a>
+                      {% else %}
+
+                    {%endif%}
+                    <div class="sticker sticker-sale"></div>
+                  </div>
+                </div>
+                {% endfor %}
+
+
+                {% for pr in product %}
+                <div>
+                  <div class="product-item">
+                    <div class="pi-img-wrapper">
+                      <img src="{{pr.image.url}}" class="img-responsive" alt="Berry Lace Dress">
+                      <div>
+                        <a href="{{pr.image.url}}" class="btn btn-default fancybox-button">Boyut</a>
+                        <a href="/shop-item/{{pr.id}}/{{pr.slug}}"  class="btn btn-default fancybox-fast-view"  >Məlumat</a>
+                      </div>
+                    </div>
+                    <h3>{{pr.title}}</h3>
+                    <div class="pi-price">{{pr.price}} azn</div>
+                      {%if user.id is not None%}
+                        <a href="/order/addtocart/{{pr.id}}" class="btn btn-default add2cart">Səbət</a>
+                        {% else %}
+
+                        {%endif%}
+
+
+                  </div>
+                </div>
+                {%endfor%}
+
+
+              </div>
+            </div>
+            <!-- END SALE PRODUCT -->
+          </div>
+
+          <!-- END SALE PRODUCT & NEW ARRIVALS -->

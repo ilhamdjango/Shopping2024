@@ -1,0 +1,32 @@
+{% load static %}
+<!-- BEGIN CONTENT -->
+        <div class="col-md-9 col-sm-8">
+          <h2>Yeni kolleksiyamız</h2>
+          <div class="owl-carousel owl-carousel3">
+              {%for pr_n in product_new %}
+            <div>
+              <div class="product-item">
+                <div class="pi-img-wrapper">
+                  <img src="{{pr_n.image.url}}" class="img-responsive" alt="Berry Lace Dress">
+                  <div>
+                    <a href="{{pr_n.image.url}}" class="btn btn-default fancybox-button">Böyüt</a>
+                    <a href="/shop-item/{{pr_n.id}}/{{pr_n.slug}}"  class="btn btn-default fancybox-fast-view">Məlumat</a>
+                  </div>
+                </div>
+                <h3>{{pr_n.title}}</h3>
+                <div class="pi-price">{{pr_n.price}} azn</div>
+                  {%if user.id is not None%}
+                    <a href="/order/addtocart/{{pr_n.id}}" class="btn btn-default add2cart">Səbət</a>
+                {% else %}
+
+                {%endif%}
+
+
+                <div class="sticker sticker-new"></div>
+              </div>
+            </div>
+            {%endfor%}
+          </div>
+        </div>
+</div>
+        <!-- END CONTENT -->

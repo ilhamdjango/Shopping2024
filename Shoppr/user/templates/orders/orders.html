@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Products Search Result {% endblock %}
+{% block keyword %} bir {%endblock%}
+{% block description %} iki {%endblock%}
+
+{% block container %}
+    <div class="main">
+      <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="{% url 'index' %}">Ana səhifə</a></li>
+            <li><a href="">Məhsullar</a></li>
+            <li class="active">Axtarış</li>
+        </ul>
+        <!-- BEGIN SIDEBAR & CONTENT -->
+        <div >
+          <!-- BEGIN SIDEBAR -->
+
+            <div class="row list-view-sorting clearfix">
+              <div class="col-md-2 col-sm-2 list-view">
+                <a href="javascript:;"><i class="fa fa-th-large"></i></a>
+                <a href="javascript:;"><i class="fa fa-th-list"></i></a>
+              </div>
+              <div class="col-md-10 col-sm-10">
+                <div>
+             <form method="POST" action="{% url 'orders' %}">
+    {% csrf_token %}
+    <div class="pull-right">
+        <label class="control-label">Sırala :</label>
+        <select class="form-control input-sm" name="selectpaginator">
+            <option value="4" {% if request.session.selectpaginator == '4' %}selected{% endif %}>4</option>
+            <option value="10" {% if request.session.selectpaginator == '10' %}selected{% endif %}>10</option>
+            <option value="25" {% if request.session.selectpaginator == '25' %}selected{% endif %}>25</option>
+            <option value="50" {% if request.session.selectpaginator == '50' %}selected{% endif %}>50</option>
+            <option value="100" {% if request.session.selectpaginator == '100' %}selected{% endif %}>100</option>
+        </select>
+        <button type="submit" class="btn btn-primary btn-sm" value="btnselect">Sırala</button>
+    </div>
+</form>
+
+              </div>
+
+            </div>
+            <!-- BEGIN PRODUCT LIST -->
+            <div >
+                <br>
+                <br>
+                 <br>
+                <br>
+                <table style="height=100" width="1000">
+                  <tr>
+                      <th><h1 style="color:red">ID</h1></th>
+                      <th><h1 style="color:red">Total</h1></th>
+                      <th><h1 style="color:red">Status</h1></th>
+                      <th><h1 style="color:red">Date</h1></th>
+                      <th><h1 style="color:red">Detail</h1></th>
+                  </tr>
+                  {% for rs in page_obj %}
+                  <tr>
+                     <td> <h4> {{rs.id}}</h4></td>
+                      <td> <h4> {{rs.first_name}}</h4></td>
+                      <td> <h4> {{rs.last_name}}</h4></td>
+                      <td> <h4> {{rs.total}}</h4></td>
+                      <td> <h4> {{rs.status}}</h4></td>
+                      <td> <h4>  {{rs.create_at}}</h4></td>
+                      <td> <h4> <a href="/user/orderdetail/{{rs.id}}">Detay</a></h4></td>
+                  </tr>
+                    {%endfor%}
+                </table>
+
+      <div class="row">
+    <div class="col-md-4 col-sm-4 items-info"> {{ page_obj.paginator.count }} sayda məhsuldan {{ page_obj.start_index }} - {{ page_obj.end_index }} saylı məhsullar
+    </div>
+    <div class="col-md-8 col-sm-8">
+        <ul class="pagination pull-right">
+            <li><a href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}">&laquo;</a></li>
+            {% for num in page_obj.paginator.page_range %}
+                <li {% if page_obj.number == num %}class="active"{% endif %}><a href="?page={{ num }}">{{ num }}</a></li>
+            {% endfor %}
+            <li><a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}">&raquo;</a></li>
+        </ul>
+    </div>
+</div>
+            <!-- END PAGINATOR -->
+
+
+            </div>
+          </div>
+          </div>
+          <!-- END CONTENT -->
+        </div>
+        <!-- END SIDEBAR & CONTENT -->
+      </div>
+    </div>
+{%endblock%}
+
+
+
+
+
+
+
+

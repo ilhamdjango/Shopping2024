@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Products Search Result {% endblock %}
+{% block keyword %} bir {%endblock%}
+{% block description %} iki {%endblock%}
+
+{% block container %}
+<body class="ecommerce">
+    <div class="main">
+      <div class="container">
+        <!-- BEGIN SIDEBAR & CONTENT -->
+        <div class="row margin-bottom-40">
+          <!-- BEGIN CONTENT -->
+          <div class="col-md-12 col-sm-12">
+            <h1>Shopping cart</h1>
+            <div class="goods-page">
+              <div class="goods-data clearfix">
+                <div class="table-wrapper-responsive">
+                <table summary="Shopping cart">
+                  <tr>
+                    <th class="goods-page-image">Şəkil</th>
+                    <th class="goods-page-description">Haqqında</th>
+                    <th class="goods-page-quantity">Miqdar</th>
+                    <th class="goods-page-price">Qiymət</th>
+                    <th class="goods-page-total" >Məbləğ</th>
+                    <th class="goods-page-del" >Sil</th>
+
+                  </tr>
+                  {%for rs in shopcart%}
+                  <tr>
+                    <td class="goods-page-image">
+                      <a href="{{rs.product.image.url}}"><img src="{{rs.product.image.url}}" ></a>
+                    </td>
+                    <td class="goods-page-description">
+                      <h3><a href= "/shop-item/{{rs.product.id}}/{{rs.product.slug}}"  ><h2 style="color:tomato">{{rs.product}}</h2></a></h3>
+                    </td>
+                    <td class="goods-page-quantity">
+                      <div class="product-quantity">
+                        <h1 style="color:tomato"> {{rs.quantity}} </h1>
+                      </div>
+                    </td>
+                    <td class="goods-page-price">
+                      <strong>{{rs.price}}<span>azn</span></strong>
+                    </td>
+                    <td class="goods-page-total">
+
+                      <strong>{{rs.amount }}<span>azn</span></strong>
+                    </td>
+                    <td class="del-goods-col">
+                      <a class="del-goods" href="/order/deletefromcart/{{rs.id}}" onclick="return confirm('Silmək  istəyinizdən  Əminmisinizmi ?')">&nbsp; </a>
+                    </td>
+                  </tr>
+                  {%endfor%}
+
+                </table>
+                </div>
+
+                <div class="shopping-total">
+                  <ul>
+                    <li>
+                      <em>Cəmi</em>
+                      <strong class="price">{{ total }}<span>azn</span></strong>
+                    </li>
+                    <li>
+                      <em>Çatdırılma</em>
+                      <strong class="price">{{shipping}}<span>azn</span></strong>
+                    </li>
+                    <li class="shopping-total-price">
+                      <em>Yekun məbləğ</em>
+                      <strong class="price">{{atotal}}<span>azn</span></strong>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <button class="btn btn-default" type="submit"><a href="/user/my_account/{{user.id}}" style="color:white">Ünvanı yoxla</a> <i class="fa fa-check"></i></button>
+              {%if user_profile.phone and user_profile.adress and user_profile.city and user_profile.country  %}
+              <button class="btn btn-primary" type="submit"><a href="/order/orderproduct" style="color:white">Sifarişi tamamla </a> <i class="fa fa-shopping-cart"></i></button>
+              {% else %}
+              <button class="btn btn-primary" type="submit"><a href="/user/my_account/{{user.id}}" style="color:white">Sifarişi tamamla </a><i class="fa fa-shopping-cart"></i></button>
+
+              {%endif%}
+
+            </div>
+          </div>
+          <!-- END CONTENT -->
+        </div>
+        <!-- END SIDEBAR & CONTENT -->
+
+
+
+        <!-- BEGIN SIMILAR PRODUCTS -->
+        <div class="row margin-bottom-40">
+          <div class="col-md-12 col-sm-12">
+            <h2>Most popular products</h2>
+            <div class="owl-carousel owl-carousel4">
+              {%  for pr_n in product_new %}
+              <div>
+                <div class="product-item">
+                  <div class="pi-img-wrapper">
+                    <img src="{{pr_n.image.url}}" class="img-responsive" alt="Berry Lace Dress">
+                    <div>
+                      <a href="{{pr_n.image.url}}" class="btn btn-default fancybox-button">Böyüt</a>
+                       <a href="/shop-item/{{pr_n.id}}/{{pr_n.slug}}" class="btn btn-default fancybox-fast-view">Məlumat</a>
+                    </div>
+                  </div>
+                  <h3><a href="shop-item.html">{{pr_n.title}}</a></h3>
+                  <div class="pi-price">{{pr_n.price}}</div>
+                 <a href="/order/addtocart/{{pr_n.id}}" class="btn btn-default add2cart">Səbət</a>
+                  <div class="sticker sticker-new"></div>
+                </div>
+              </div>
+              {% endfor %}
+          </div>
+        </div>
+        <!-- END SIMILAR PRODUCTS -->
+      </div>
+    </div>
+</body>
+{% endblock %}

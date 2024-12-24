@@ -1,0 +1,14 @@
+    {% load static %}
+    <!-- BEGIN BRANDS -->
+    <div class="brands">
+        <div class="container">
+              <div class="owl-carousel owl-carousel6-brands">
+                  {%for sd_k in slider_pk8 %}
+                <img src="{{sd_k.image.url}}" alt="canon" title={{sd_k.title}}>
+
+
+                  {% endfor %}
+              </div>
+          </div>
+      </div>
+      <!-- END BRANDS -->

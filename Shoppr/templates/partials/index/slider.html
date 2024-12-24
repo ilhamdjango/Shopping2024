@@ -1,0 +1,100 @@
+   {% load static %}
+
+   <!-- BEGIN SLIDER -->
+    <div class="page-slider margin-bottom-35">
+        <div id="carousel-example-generic" class="carousel slide carousel-slider">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+            </ol>
+
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <!-- First slide -->
+
+
+                 <div class="item carousel-item-four active">
+                        <a href="" ><img src="{{ slider_pk1.image.url }}" width="100%" height="100%" /></a>
+                    <div class="container">
+                        <div class="carousel-position-four text-center">
+
+                            <h2 class="margin-bottom-20 animate-delay carousel-title-v3 border-bottom-title text-uppercase" data-animation="animated fadeInDown">
+                                {{slider_pk1.promotion1}} <br/><span class="color-red-v2">{{slider_pk1.promotion2}}</span><br/> {{slider_pk1.promotion3}}
+                            </h2>
+                            <p class="carousel-subtitle-v2" data-animation="animated fadeInUp"> <br/>
+                            {{slider_pk1.promotion4}}</p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Second slide -->
+                <div class="item carousel-item-five">
+                    <a href="" ><img src="{{ slider_pk2.image.url }}" width="100%" height="100%" /></a>
+                    <div class="container">
+                        <div class="carousel-position-four text-center">
+                            <h2 class="animate-delay carousel-title-v4" data-animation="animated fadeInDown">
+                                {{slider_pk2.promotion1}}
+                            </h2>
+                            <p class="carousel-subtitle-v2" data-animation="animated fadeInDown">
+                                {{slider_pk2.promotion2}}
+                            </p>
+                            <p class="carousel-subtitle-v3 margin-bottom-30" data-animation="animated fadeInUp">
+                                {{slider_pk2.promotion3}}
+                            </p>
+                            <a class="carousel-btn" href="{% url 'index' %}" data-animation="animated fadeInUp">{{slider_pk2.promotion4}}</a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Third slide -->
+                <div class="item carousel-item-six">
+                    <a href="" ><img src="{{ slider_pk3.image.url }}" width="100%" height="100%" /></a>
+                    <div class="container">
+                        <div class="carousel-position-four text-center">
+                            <span class="carousel-subtitle-v3 margin-bottom-15" data-animation="animated fadeInDown">
+                                {{slider_pk3.promotion1}}
+                            </span>
+                            <p class="carousel-subtitle-v4" data-animation="animated fadeInDown">
+                                {{slider_pk3.promotion2}}
+                            </p>
+                            <p class="carousel-subtitle-v3" data-animation="animated fadeInDown">
+                                {{slider_pk3.promotion3}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fourth slide -->
+                <div class="item carousel-item-seven">
+                    <a href="" ><img src="{{ slider_pk4.image.url }}" width="100%" height="100%" /></a>
+                   <div class="center-block">
+                        <div class="center-block-wrap">
+                            <div class="center-block-body">
+                                <h2 class="carousel-title-v1 margin-bottom-20" data-animation="animated fadeInDown">
+                                    {{slider_pk4.promotion1}} <br/>
+                                    {{slider_pk4.promotion2}} <br/>
+
+                                </h2>
+                                <a class="carousel-btn" href="{% url 'index' %}" data-animation="animated fadeInUp">{{slider_pk4.promotion3}} </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <a class="left carousel-control carousel-control-shop" href="#carousel-example-generic" role="button" data-slide="prev">
+                <i class="fa fa-angle-left" aria-hidden="true"></i>
+            </a>
+            <a class="right carousel-control carousel-control-shop" href="#carousel-example-generic" role="button" data-slide="next">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </a>
+        </div>
+    </div>
+    <!-- END SLIDER -->

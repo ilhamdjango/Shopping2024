@@ -1,0 +1,30 @@
+{% load static %}   
+  <!-- BEGIN TWO PRODUCTS -->
+  <div class="col-md-6 two-items-bottom-items">
+    <h2>Kampaniyalarımız</h2>
+    <div class="owl-carousel owl-carousel2">
+      {% for pr_k in product_kampaniya%}
+      <div>
+        <div class="product-item">
+          <div class="pi-img-wrapper">
+            <img src="{{pr_k.image.url}}" class="img-responsive" alt="Berry Lace Dress">
+            <div>
+              <a href="{{pr_k.image.url}}" class="btn btn-default fancybox-button">Böyüt</a>
+              <a href="/shop-item/{{pr_k.id}}/{{pr_k.slug}}"  class="btn btn-default fancybox-fast-view">Məlumat</a>
+            </div>
+          </div>
+          <h3>{{pr_k.title}}</h3>
+          <div class="pi-price">{{pr_k.price}} azn</div>
+          {%if user.id is not None%}
+          <a href="/order/addtocart/{{pr_k.id}}" class="btn btn-default add2cart">Səbət</a>
+          {% else %}
+
+          {%endif%}
+
+
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <!-- END TWO PRODUCTS -->

@@ -1,0 +1,233 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ product.title}}{% endblock %}
+
+{%block container2 %}
+
+<!-- Body BEGIN -->
+<body class="ecommerce">
+
+
+
+
+
+    
+    <div class="main">
+      <div class="container">
+
+        <!-- BEGIN SIDEBAR & CONTENT -->
+        <div class="row margin-bottom-40">
+
+        {% include 'partials/sidebar.html' %}
+
+
+
+          <!-- BEGIN CONTENT -->
+          <div class="col-md-9 col-sm-7">
+            <div class="product-page">
+              <div class="row">
+                <div class="col-md-6 col-sm-6">
+                  <div class="product-main-image">
+                    <img src="{{product.image.url}}"  class="img-responsive" data-BigImgsrc="assets/pages/img/products/model7.jpg">
+                  </div>
+                  <div class="product-other-images">
+                    {%for pr_i in product_images%}
+                    <a href="{{pr_i.image.url}}" class="fancybox-button" rel="photos-lib"><img  src="{{pr_i.image.url}}"></a>
+                      {%endfor%}
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                  <h1>{{product.title}}</h1>
+                  <div class="price-availability-block clearfix">
+                    <div class="price">
+                      <strong><span> </span>{{product.price}} azn</strong>
+
+                    </div>
+                    <div class="availability">
+                      Availability: <strong>Anbarda {{product.amount}} var</strong>
+                    </div>
+                  </div>
+                  {%if user.id is not None%}
+                  <form action="/order/addtocart/{{product.id}}" method="post">
+                    {% csrf_token %}
+                  <div class="product-page-cart">
+                    <div class="product-quantity">
+                        <input id="product-quantity" name="quantity" min="0" max="{{product.amount }}" type="text" value="1" readonly class="form-control input-sm">
+                    </div>
+
+
+                    <button class="btn btn-primary" type="submit">Səbətə əlavə et</button>
+                    {% else %}
+
+                    {%endif%}
+
+
+                  </div>
+                  </form>
+                     {% if messages  %}
+                      {% for message in messages %}
+                      <div class="alert alert-{{ message.tags }}" role="alert" >
+                      {{ message }}
+                      </div>
+                        {%endfor%}
+                      {%endif%}
+
+
+
+                  <div class="review">
+                    <a href="javascript:;">baxış sayı 10</a>
+                  </div>
+                  <ul class="social-icons">
+                    <li><a class="facebook" data-original-title="facebook" href="javascript:;"></a></li>
+                    <li><a class="twitter" data-original-title="twitter" href="javascript:;"></a></li>
+                    <li><a class="googleplus" data-original-title="googleplus" href="javascript:;"></a></li>
+                    <li><a class="evernote" data-original-title="evernote" href="javascript:;"></a></li>
+                    <li><a class="tumblr" data-original-title="tumblr" href="javascript:;"></a></li>
+                  </ul>
+                </div>
+
+                <div class="product-page-content">
+                  <ul id="myTab" class="nav nav-tabs">
+                    <li><a href="#Description" data-toggle="tab">Detallı</a></li>
+                    <li class="active"><a href="#Reviews" data-toggle="tab">Rəylər (2)</a></li>
+                  </ul>
+                  <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade" id="Description">
+                      <p>{{product.detail|safe }}</p>
+                    </div>
+
+                    <div class="tab-pane fade in active" id="Reviews">
+                      <!--<p>There are no reviews for this product.</p>-->
+
+
+                      {% for comment in comment%}
+                      <div class="review-item clearfix">
+                        <div class="review-item-submitted">
+                          <strong>{{comment.user}}</strong>
+                          <em>{{comment.create_at}}</em>
+                          <div class="rateit" data-rateit-value="5" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                        </div>
+                        <div class="review-item-content">
+                            <p>{{comment.comment}}</p>
+                        </div>
+                      </div>
+                    {% endfor %}
+                      <!-- BEGIN FORM-->
+                      <form action="/addcomment/{{ product.id }}" class="reviews-form" method="post">
+                        {% csrf_token %}
+                        <h2>Rəy yazın</h2>
+
+                        <div class="form-group">
+                          <label for="subject">Mövzu</label>
+                          <input type="text" class="form-control" id="subject" name="subject">
+                        </div>
+                        <div class="form-group">
+                          <label for="review">Mesajınız<span class="require">*</span></label>
+                          <textarea class="form-control" rows="8" id="review" name="comment"></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label for="subject">Reytinq</label>
+                          <input type="range"  step="1" id="backing5" name="rate">
+                          <div class="rateit" data-rateit-backingfld="#backing5" data-rateit-resetable="false"  data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="100">
+                          </div>
+                        </div>
+                        {% if user.id is not None %}
+                        <div class="padding-top-20">
+                          <button class="btn btn-primary">Göndər</button>
+                        </div>
+                        {% else %}
+                        Rəy yazmaq üçün qeydiyyatdan keçin !
+                        {%  endif %}
+                      </form>
+                      <!-- END FORM-->
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+          <!-- END CONTENT -->
+        </div>
+        <!-- END SIDEBAR & CONTENT -->
+
+        <!-- BEGIN SIMILAR PRODUCTS -->
+        <div class="row margin-bottom-40">
+          <div class="col-md-12 col-sm-12">
+            <h2>Ən çox satılan mallar</h2>
+
+            <!--Yeni-->
+            <div class="owl-carousel owl-carousel4">
+               {%for pr_p in product_popular %}
+              <div>
+                <div class="product-item">
+                  <div class="pi-img-wrapper">
+                    <img src="{{pr_p.image.url}}" class="img-responsive" alt="Berry Lace Dress">
+                    <div>
+                      <a href="{{pr_p.image.url}}" class="btn btn-default fancybox-button">Böyüt</a>
+                      <a href="/shop-item/{{pr_p.id}}/{{pr_p.slug}}" class="btn btn-default fancybox-fast-view">Məlumat</a>
+                    </div>
+                  </div>
+                  <h3><a href="shop-item.html">{{pr_p.title}}</a></h3>
+                  <div class="pi-price">{{pr_p.price}} azn</div>
+                  <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                  <div class="sticker sticker-new"></div>
+                </div>
+              </div>
+              {%endfor%}
+
+
+
+              {%for pr_s in product_simple %}
+              <div>
+                <div class="product-item">
+                  <div class="pi-img-wrapper">
+                    <img src="{{pr_s.image.url}}" class="img-responsive" alt="Berry Lace Dress">
+                    <div>
+                      <a href="{{pr_s.image.url}}" class="btn btn-default fancybox-button">Böyüt</a>
+                      <a href="/shop-item/{{pr_s.id}}/{{pr_s.slug}}" class="btn btn-default fancybox-fast-view">Məlumat</a>
+                    </div>
+                  </div>
+                  <h3><a href="shop-item.html">{{pr_s.title}}</a></h3>
+                  <div class="pi-price">{{pr_s.price}} azn</div>
+                  <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                </div>
+              </div>
+              {%endfor%}
+
+              {%for pr_ss in product_sale %}
+              <div>
+                <div class="product-item">
+                  <div class="pi-img-wrapper">
+                    <img src="{{pr_ss.image.url}}" class="img-responsive" alt="Berry Lace Dress">
+                    <div>
+                      <a href="{{pr_ss.image.url}}" class="btn btn-default fancybox-button">Böyüt</a>
+                      <a href="/shop-item/{{pr_ss.id}}/{{pr_ss.slug}}" class="btn btn-default fancybox-fast-view">Məlumat</a>
+                    </div>
+                  </div>
+                  <h3><a href="shop-item.html">{{pr_ss.title}}</a></h3>
+                  <div class="pi-price">{{pr_ss.price}}</div>
+                  <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                  <div class="sticker sticker-sale"></div>
+                </div>
+              </div>
+              {%endfor%}
+
+
+            </div>
+          </div>
+        </div>
+        <!-- END SIMILAR PRODUCTS -->
+      </div>
+    </div>
+
+
+
+   
+
+
+
+
+</body>
+{%endblock%}

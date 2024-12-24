@@ -1,0 +1,115 @@
+  {% load static %}
+  <!-- BEGIN PRE-FOOTER -->
+  <div class="pre-footer">
+    <div class="container">
+      <div class="row">
+        <!-- BEGIN BOTTOM ABOUT BLOCK -->
+        <div class="col-md-3 col-sm-6 pre-footer-col">
+          <h2>Haqqımızda</h2>
+          <p>{{setting.description}} </p>
+          <p>{{setting.company}}</p>
+        </div>
+        <!-- END BOTTOM ABOUT BLOCK -->
+        <!-- BEGIN BOTTOM INFO BLOCK -->
+        <div class="col-md-3 col-sm-6 pre-footer-col">
+          <h2>Xidmətlərimiz</h2>
+          <ul class="list-unstyled">
+            <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Çatdırılma</a></li>
+            <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Müştəri xidmətləri</a></li>
+            <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Sifarişinizi izlə</a></li>
+
+            <li><i class="fa fa-angle-right"></i> <a href="{% url 'contact' %}">Bizimlə əlaqə</a></li>
+            <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Referanslarımız</a></li>
+            <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Ödəniş üsulları</a></li>
+          </ul>
+        </div>
+        <!-- END INFO BLOCK -->
+
+        <!-- BEGIN TWITTER BLOCK --> 
+          <div class="col-md-3 col-sm-6 pre-footer-col">
+          <h2>Səhifələr</h2>
+          <ul class="list-unstyled">
+            <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Çatdırılma</a></li>
+            <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Müştəri xidmətləri</a></li>
+            <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Sifarişinizi izlə</a></li>
+
+            <li><i class="fa fa-angle-right"></i> <a href="{% url 'contact' %}">Bizimlə əlaqə</a></li>
+            <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Referanslarımız</a></li>
+            <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Ödəniş üsulları</a></li>
+          </ul>
+        </div>
+        <!-- END TWITTER BLOCK -->
+
+        <!-- BEGIN BOTTOM CONTACTS -->
+        <div class="col-md-3 col-sm-6 pre-footer-col">
+          <h2>Əlaqə</h2>
+          <address class="margin-bottom-40">
+            {{setting.adress}}<br>
+            Telefon: {{setting.phone}}<br>
+            Fax: {{setting.fax}}<br>
+            Email: <a href="mailto:info@metronic.com">{{setting.email}}</a><br>
+
+          </address>
+        </div>
+        <!-- END BOTTOM CONTACTS -->
+      </div>
+      <hr>
+      <div class="row">
+        <!-- BEGIN SOCIAL ICONS -->
+        <div class="col-md-6 col-sm-6">
+          <ul class="social-icons">
+
+            <li><a class="facebook" data-original-title="facebook" href="javascript:;"></a></li>
+            <li><a class="youtube" data-original-title="youtube" href="javascript:;"></a></li>
+            <li><a class="instagram" data-original-title="youtube" href="javascript:;"></a></li>
+
+
+          </ul>
+        </div>
+        <!-- END SOCIAL ICONS -->
+        <!-- BEGIN NEWLETTER -->
+        <div class="col-md-6 col-sm-6">
+          <div class="pre-footer-subscribe-box pull-right">
+            <h2>Yeniliklər</h2>
+            <form action="#">
+              <div class="input-group">
+                <input type="text" placeholder="email adresiniz" class="form-control">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="submit">Abunə ol</button>
+                </span>
+              </div>
+            </form>
+          </div> 
+        </div>
+        <!-- END NEWLETTER -->
+      </div>
+    </div>
+  </div>
+  <!-- END PRE-FOOTER -->
+
+  <!-- BEGIN FOOTER -->
+  <div class="footer">
+    <div class="container">
+      <div class="row">
+        <!-- BEGIN COPYRIGHT -->
+        <div class="col-md-4 col-sm-4 padding-top-10">
+          2023 © Ilham Seferov
+        </div>
+        <!-- END COPYRIGHT -->
+        <!-- BEGIN PAYMENTS -->
+        <div class="col-md-4 col-sm-4">
+          <ul class="list-unstyled list-inline pull-right">
+            <li><img src="{% static 'assets/corporate/img/payments/MasterCard.jpg' %}" alt="We accept MasterCard" title="We accept MasterCard"></li>
+            <li><img src="{% static 'assets/corporate/img/payments/visa.jpg' %}" alt="We accept Visa" title="We accept Visa"></li>
+          </ul>
+        </div>
+        <!-- END PAYMENTS -->
+        <!-- BEGIN POWERED -->
+        <div class="col-md-4 col-sm-4 text-right">
+          <p class="powered">Powered by: <a href="">İlham Səfərov</a></p>
+        </div>
+        <!-- END POWERED -->
+      </div>
+    </div>
+  </div>
+  <!-- END FOOTER -->

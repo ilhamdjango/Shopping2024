@@ -1,0 +1,128 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Products Search Result{% endblock %}
+{% block keyword %}bir{% endblock %}
+{% block description %}iki{% endblock %}
+
+{% block container %}
+<body class="ecommerce">
+    <div class="main">
+        <div class="container">
+            <!-- BEGIN SIDEBAR & CONTENT -->
+            <div class="row margin-bottom-40">
+                <!-- BEGIN CONTENT -->
+                <div class="col-md-12 col-sm-12">
+                    <div class="col-md-9 col-sm-9">
+                        <div class="content-form-page">
+
+                              {% if messages %}
+              {% for message in messages %}
+              <div class="alert alert-{{message.tags}}" role="alert" >
+                {{ message }}
+              </div>
+              {% endfor %}
+              {% endif %}
+
+<form role="form" class="form-horizontal form-without-legend" method="post" action="{% url 'orderproduct' %}">
+    {% csrf_token %}
+    
+    <div class="form-group">
+        <label class="col-lg-4 control-label">First Name</label>
+        <div class="col-lg-6">
+            <input type="text" value="{{ user.first_name }}" name="first_name" class="form-control" readonly>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-4 control-label">Last Name</label>
+        <div class="col-lg-6">
+            <input type="text" value="{{ user.last_name }}" name="last_name" class="form-control" readonly>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-4 control-label">Email</label>
+        <div class="col-lg-6">
+            <input type="text" value="{{ user.email }}" class="form-control" name="email" readonly>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-4 control-label">Phone</label>
+        <div class="col-lg-6">
+            <input type="number" value="{{ user_profile.phone }}" class="form-control" name="phone" readonly>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-4 control-label">Country</label>
+        <div class="col-lg-6">
+            <input type="text" value="{{ user_profile.country }}" class="form-control" name="country" readonly>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-4 control-label">City</label>
+        <div class="col-lg-6">
+            <input type="text" value="{{ user_profile.city }}" class="form-control" name="city" readonly>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-4 control-label">Address</label>
+        <div class="col-lg-6">
+            <input type="text" value="{{ user_profile.adress }}" class="form-control" name="address" readonly>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-4 control-label">Credit Card Number</label>
+        <div class="col-lg-6">
+            <input type="number" class="form-control" name="creditcart_number" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-4 control-label">Credit Card Expiry Date</label>
+        <div class="col-lg-6">
+            <input type="date" class="form-control" name="creditcart_date" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-4 control-label">Credit Card Code</label>
+        <div class="col-lg-6">
+            <input type="number" min="100" max="999" class="form-control" name="creditcart_code" required>
+        </div>
+    </div>
+    <div class="goods-page">
+        <div class="goods-data clearfix">
+            <div class="table-wrapper-responsive">
+                <table summary="Shopping cart">
+                    <tr>
+                        <th class="goods-page-total">Amount</th>
+                    </tr>
+                </table>
+            </div>
+            <div class="shopping-total">
+                <ul>
+                    <li>
+                        <em>Total</em>
+                        <strong class="price">{{ total }}<span>azn</span></strong>
+                    </li>
+                    <li>
+                        <em>Shipping</em>
+                        <strong class="price">{{ shipping }}<span>azn</span></strong>
+                    </li>
+                    <li class="shopping-total-price">
+                        <em>Grand Total</em>
+                        <strong class="price">{{ atotal }}<span>azn</span></strong>
+                    </li>
+                </ul>
+                <button class="btn btn-primary" type="submit">Complete Order <i class="fa fa-shopping-cart"></i></button>
+            </div>
+        </div>
+    </div>
+</form>
+                        </div>
+                    </div>
+                </div>
+                <!-- END CONTENT -->
+            </div>
+            <!-- END SIDEBAR & CONTENT -->
+        </div>
+    </div>
+</body>
+{% endblock %}

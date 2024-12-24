@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ categorydata.title }}{% endblock %}
+{% block container %}
+<div class="main">
+    <div class="container">
+        {% endblock %}
+         {% block sidebar %}   {% include 'partials/sidebar.html' %}
+        <div class="col-md-9 col-sm-7">
+            <div class="row list-view-sorting clearfix">
+              <div class="col-md-2 col-sm-2 list-view">
+                <a href="javascript:;"><i class="fa fa-th-large"></i></a>
+                <a href="javascript:;"><i class="fa fa-th-list"></i></a>
+              </div>
+                        <div>
+                    <form method="GET" action="/productrange/">
+                        <label class="control-label">Göstər:</label>
+                        <div class="pull-right">
+                            <label class="control-label">Sırala :</label>
+                             <select class="form-control input-sm" name="selectmenu">
+                                 <option value="cari" selected="selected">Cari</option>
+                                 <option value="ucuz">Ucuzdan &gt; Bahaya</option>
+                                 <option value="baha">Bahadan < Ucuza</option>
+                                 <option value="reyting">Reyting üzrə</option>
+                             </select>
+                             <select class="form-control input-sm" name="selectpaginator">
+                                  <option value="6" >6</option>
+                                  <option value="15">15</option>
+                                  <option value="27">27</option>
+                                  <option value="51">51</option>
+                                  <option value="102">102</option>
+                             </select>
+                                <input type="hidden" name="categorydata" value="{{categorydata.id}}" >
+                            <button type="submit" class="btn btn-primary btn-sm" value="btnselect"> Sırala</button>
+                        </div>
+                       </form>
+              </div>
+            </div>
+             {% if messages  %}
+                      {% for message in messages %}
+                      <div class="alert alert-{{ message.tags }}" role="alert" >
+                      {{ message }}
+                      </div>
+                        {%endfor%}
+                      {%endif%}
+            <!-- BEGIN PRODUCT LIST -->
+            <div class="row product-list">
+              <!-- PRODUCT ITEM START -->
+                {% for rs in page_obj %}
+              <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="product-item">
+                  <div class="pi-img-wrapper">
+                    <img src="{{rs.image.url}}" class="img-responsive" >
+                    <div>
+                        <a href="{{rs.image.url}}" class="btn btn-default fancybox-button">Böyüt</a>
+                        <a href="/shop-item/{{rs.id}}/{{rs.slug}}" class="btn btn-default fancybox-fast-view">Məlumat</a>
+                    </div>
+                  </div>
+                  <h3><a href="shop-item.html">{{rs.title}}</a></h3>
+                  <div class="pi-price">{{rs.price}} azn</div>
+                    {%if user.id is not None%}
+                     <a href="/order/addtocart/{{rs.id}}" class="btn btn-default add2cart">Səbət</a>
+                    {% else %}
+
+                    {%endif%}
+
+
+                  <div class="1"></div>
+                </div>
+              </div>
+                {%endfor%}
+
+              <!-- PRODUCT ITEM END -->
+            </div>
+            <!-- END PRODUCT LIST -->
+            <!-- BEGIN PAGINATOR -->
+      <div class="row">
+    <div class="col-md-4 col-sm-4 items-info"> {{ page_obj.paginator.count }} sayda məhsuldan {{ page_obj.start_index }} - {{ page_obj.end_index }} saylı məhsullar
+
+    </div>
+    <div class="col-md-8 col-sm-8">
+        <ul class="pagination pull-right">
+            <li><a href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}">&laquo;</a></li>
+            {% for num in page_obj.paginator.page_range %}
+                <li {% if page_obj.number == num %}class="active"{% endif %}><a href="?page={{ num }}">{{ num }}</a></li>
+            {% endfor %}
+            <li><a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}">&raquo;</a></li>
+        </ul>
+    </div>
+</div>
+            <!-- END PAGINATOR -->
+          </div>
+        {% endblock %}
+        {% block container2 %}
+      <!-- BEGIN TWO PRODUCTS & PROMO -->
+      <div class="row margin-bottom-35 ">
+      </div>
+      <!-- END TWO PRODUCTS & PROMO -->
+    </div>
+  </div>
+ {% endblock %}

@@ -1,0 +1,40 @@
+   <!-- BEGIN TOP BAR -->
+   <div class="pre-header">
+    <div class="container">
+        <div class="row">
+            <!-- BEGIN TOP BAR LEFT PART -->
+            <div class="col-md-6 col-sm-6 additional-shop-info">
+                <ul class="list-unstyled list-inline">
+                    <li><i class="fa fa-phone"></i><span>{{setting.phone}}</span></li>
+                    <!-- BEGIN CURRENCIES -->
+
+                    <!-- END CURRENCIES -->
+                    <!-- BEGIN LANGS -->
+
+                    <!-- END LANGS -->
+                </ul>
+            </div>
+            <!-- END TOP BAR LEFT PART -->
+            <!-- BEGIN TOP BAR MENU -->
+            {%if user.id is not None%}
+            <div class="col-md-6 col-sm-6 additional-nav">
+                <ul class="list-unstyled list-inline pull-right">
+                    <li><a href="{% url 'my_account' id=user.id %}">Kabinetim</a></li>
+                    <li>{{user.username}}</li>
+                     <li><a href="{% url 'logout_view' %}">Çıxış</a></li>
+                </ul>
+            </div>
+            {% else %}
+             <div class="col-md-6 col-sm-6 additional-nav">
+                  <ul class="list-unstyled list-inline pull-right">
+                    <li><a href="{% url 'login_view' %}">Daxil ol</a></li>
+                      <li><a href="{% url 'register_view' %}">Qeydiyyat</a></li>
+                </ul>
+            </div>
+            {%endif%}
+
+            <!-- END TOP BAR MENU -->
+        </div>
+    </div>        
+</div>
+<!-- END TOP BAR -->

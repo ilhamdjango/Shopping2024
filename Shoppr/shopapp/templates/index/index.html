@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ setting.title }}
+{% endblock %}
+
+
+{% block container %}
+{% include 'partials/index/slider.html' %}
+<div class="main">
+    <div class="container">
+        {% include 'partials/index/productsale.html' %}
+        {% endblock %}
+
+
+
+         {% block sidebar %}
+        {% include 'partials/sidebar.html' %}
+        {% include 'partials/contentsidebar.html' %}
+        {% endblock %}
+
+
+        {% block container2 %}
+      <!-- BEGIN TWO PRODUCTS & PROMO -->
+      <div class="row margin-bottom-35 ">
+        {% include 'partials/index/promotwoproducts.html' %}
+        {% include 'partials/index/productpromo.html' %}
+      </div>        
+      <!-- END TWO PRODUCTS & PROMO -->
+    </div>
+  </div>
+ {% endblock %}

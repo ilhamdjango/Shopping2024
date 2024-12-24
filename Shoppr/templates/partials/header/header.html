@@ -1,0 +1,92 @@
+  {% load static %}
+  <!-- BEGIN HEADER -->
+
+
+
+
+
+  <div class="header">
+    <div class="container">
+      <a class="site-logo" href="{% url 'index' %}"><img src="{% static 'assets/corporate/img/logos/a1.png' %}" ></a>
+
+      <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+      <!-- BEGIN CART -->
+
+      <!--END CART -->
+
+      <!-- BEGIN NAVIGATION -->
+<div class="header-navigation">
+  <ul>
+    <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
+              Təkliflərimiz <!-- burdadilar-->
+
+            </a>
+              
+            <!-- BEGIN DROPDOWN MENU -->
+            <ul class="dropdown-menu">
+              <li class="dropdown-submenu">
+                <a href="/newproduct">Yeni məhsullar<i class="fa fa-angle-right"></i></a>
+              </li>
+
+              <li><a href="/saleproduct">Endirimlər<i class="fa fa-angle-right"></i></a></li>
+            </ul>
+            <!-- END DROPDOWN MENU -->
+          </li>
+
+             <li><a href="/campaign">Kampaniyalar</a></li>
+
+          <li><a href="{% url 'contact' %}">Bizimlə əlaqə</a></li>
+          <!-- BEGIN TOP SEARCH -->
+      <li class="search-box1">
+               <form action="/search/" method="post" >
+                 {% load mptt_tags%}
+                 <select  name="catid" id="catid" >
+                    <option value="0"> Kategoriya seç</option>
+                      {% recursetree category %}
+                      {% if node.is_leaf_node%} <option value="{{node.id}}">{{node.title}}</option>{% endif %}
+                      {% if not node.is_leaf_node %}
+
+                    <optgroup label="{{node.title}}">
+                      {{children}}
+                    </optgroup>
+                     {%endif%}
+                     {% endrecursetree %}
+                 </select>
+                  {% csrf_token %}
+                <input  id="query" type="text" placeholder="Axtarış"  name="query"  >
+                <button  type="submit">Axtarış</button>
+                </form>
+      </li>
+
+
+
+
+    <!-- Burda qaldim-->
+      <div class="top-cart-block" >
+        <div class="top-cart-info">
+          <a href="/order/shopcart" class="top-cart-info-count">{{request.session.cart_items}} məhsul</a>
+
+        </div>
+        <a href="/order/shopcart" ><i class="fa fa-shopping-cart" > </i></a>
+
+      </div>
+
+
+
+</ul>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+<script>
+  $( function() {
+        $( "#query" ).autocomplete({
+         source: "{% url 'autocomplete' %}"
+        });
+   } );
+</script>
+</div>
+</div>
+</div>

@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %} {{ setting.title }}
+{% endblock %}
+
+
+{%block container2 %}
+
+<!-- Body BEGIN -->
+<body class="ecommerce">
+    <!-- BEGIN STYLE CUSTOMIZER -->
+
+    <!-- END BEGIN STYLE CUSTOMIZER -->
+
+    <!-- BEGIN TOP BAR -->
+
+
+    <!-- BEGIN HEADER -->
+
+
+    <div class="main">
+      <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="{% url 'index' %}">Home</a></li>
+
+        </ul>
+        <!-- BEGIN SIDEBAR & CONTENT -->
+        <div class="row margin-bottom-40">
+          <!-- BEGIN SIDEBAR -->
+          <div class="sidebar col-md-3 col-sm-5">
+              <style>
+                .avatar {
+                vertical-align: middle;
+                 width: 100px;
+                 height: 100px;
+
+                }
+                </style>
+
+         {% if user_profile.image.url is not None %}
+    <form method="post" action="{% url 'my_account2' user.id %}" enctype="multipart/form-data">
+        <img src="{{ user_profile.image.url }}" alt="avatar" class="avatar">
+        {% csrf_token %}
+{% else %}
+    <form method="post" action="{% url 'my_account2' user.id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+{% endif %}
+    <br><br>
+    <div>
+        <div>
+            <label for="files">Şəkil seç</label>
+            <input id="files" style="visibility:hidden;" type="file" name="file">
+        </div>
+       <!-- <button  class="btn btn-primary" type="submit" style="center">Dəyiş</button>  -->
+        <!-- Bunu sorusacam -->
+    </div>
+    </form>
+
+<!-- Add jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#files').change(function() {
+            $(this).closest('form').submit();
+        });
+    });
+</script>
+
+
+             <br>
+            <br>
+            <ul class="list-group margin-bottom-25 sidebar-menu">
+              <li class="list-group-item clearfix"><a href="{% url 'change_password' %}"><i class="fa fa-angle-right"></i> Şifrəni dəyiş</a></li>
+               <li class="list-group-item clearfix"><a href="{% url 'orders' %}"><i class="fa fa-angle-right"></i> Sifarişlər</a></li>
+                <li class="list-group-item clearfix"><a href="{% url 'comments' %}"><i class="fa fa-angle-right"></i> Rəylər</a></li>
+
+
+            </ul>
+          </div>
+          <!-- END SIDEBAR -->
+
+          <!-- BEGIN CONTENT -->
+
+          <div class="col-md-9 col-sm-7">
+            <h1>{{user.username}}</h1>
+                              {% if messages %}
+              {% for message in messages %}
+              <div class="alert alert-{{message.tags}}" role="alert" >
+                {{ message }}
+              </div>
+              {% endfor %}
+              {% endif %}
+
+            <div class="content-form-page">
+             <form role="form" class="form-horizontal form-without-legend" method="post" action="{% url 'my_account' user.id %}">
+                    {% csrf_token %}
+                <div class="form-group">
+                  <label class="col-lg-2 control-label" >Adınız </label>
+                  <div class="col-lg-8">
+                    <input type="text" value="{{user.first_name}}" name="first_name_text" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                   <label class="col-lg-2 control-label">Soyadınız </label>
+                  <div class="col-lg-8">
+                    <input type="text" value="{{user.last_name}}"  name="last_name_text" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label" >Email</label>
+                  <div class="col-lg-8">
+                    <input type="text" value="{{user.email}}" class="form-control" name="email_text">
+                  </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label" >Telefon nömrəniz </label>
+                  <div class="col-lg-8">
+                    <input type="number" value="{{user_profile.phone }}" class="form-control" name="phone_text">
+                  </div>
+                </div>
+
+                  <div class="form-group"><label class="col-lg-2 control-label" >Ölkə </label>
+                  <div class="col-lg-8">
+                    <input type="text" value="{{user_profile.country }}" class="form-control" name="country_text">
+                  </div>
+                  </div>
+
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label" >Şəhər </label>
+                  <div class="col-lg-8">
+                    <input type="text" value="{{user_profile.city }}" class="form-control" name="city_text">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-2 control-label" >Ünvan </label>
+                  <div class="col-lg-8">
+                     <input type="text" value="{{user_profile.adress }}" class="form-control"  name="address_text">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
+                    <button class="btn btn-primary" type="submit" name="btnsave">Yadda saxla</button>
+                  </div>
+                </div>
+              </form>
+
+            </div>
+          </div>
+          <!-- END CONTENT -->
+        </div>
+        <!-- END SIDEBAR & CONTENT -->
+      </div>
+    </div>
+
+
+
+{% endblock %}
